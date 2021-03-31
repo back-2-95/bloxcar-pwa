@@ -8,7 +8,7 @@
 export default {
   name: 'VehicleListItem',
   props: {
-    vehicle: Array
+    vehicle: Object
   }
 }
 
