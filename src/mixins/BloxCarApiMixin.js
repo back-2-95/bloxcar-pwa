@@ -1,5 +1,5 @@
 const axios = require("axios");
-const API_URL = "https://bloxcar.fi";
+const API_URL = "/api/vehiclelist/v2/vehicles";
 
 export const requestsMixin = {
     created() {
@@ -7,7 +7,7 @@ export const requestsMixin = {
     },
     methods: {
         getVehiclesData() {
-            return axios.get(`${API_URL}/vehiclelist?show=id,prices,availability`);
+            return axios.get(`${API_URL}?range=1,50&show=id,title,vehicle_average_rating,image,position,prices,distance`);
         }
     }
 };
