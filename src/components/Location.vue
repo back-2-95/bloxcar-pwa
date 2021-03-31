@@ -1,6 +1,6 @@
 <template>
   <div class="location">
-    <p>location</p>
+    <p></p>
   </div>
 </template>
 

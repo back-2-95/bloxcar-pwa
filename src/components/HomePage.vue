@@ -1,15 +1,15 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h3>{{ msg }}</h3>
     <Location></Location>
-    <div v-for="(b, i) in vehicles" :key="i" class="car">
-        <p>{{b.title}}</p>
-    </div>
+    <VehicleList :vehicles=vehicles></VehicleList>
   </div>
 </template>
 
 <script>
 import Location from './Location.vue';
+import VehicleList from './VehicleList'
+
 import { requestsMixin } from "@/mixins/BloxCarApiMixin";
 
 export default {
@@ -23,7 +23,7 @@ export default {
   created() {
     this.vehicles = this.getVehicles();
   },
-  components: {Location},
+  components: {Location, VehicleList},
   props: {
     msg: String
   },
@@ -41,6 +41,12 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
+<style>
+a {
+  color: #ff5a64;
+  text-decoration: none;
+}
+img {
+  max-width: 100%;
+}
 </style>
