@@ -1,10 +1,5 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-
-import runtime from "serviceworker-webpack-plugin/lib/runtime";
-
-if ("serviceWorker" in navigator) {
-    runtime.register();
-}
+import './registerServiceWorker'
 
 createApp(App).mount('#app')
