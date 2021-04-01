@@ -11,7 +11,7 @@ import VehicleListItem from "./VehicleListItem";
 export default {
   name: 'VehicleList',
   props: {
-    vehicles: [Promise, Array]
+    vehicles: [Object]
   },
   components: {VehicleListItem},
 }

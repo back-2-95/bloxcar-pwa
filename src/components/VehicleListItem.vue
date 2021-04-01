@@ -1,5 +1,5 @@
 <template>
-    <p><a :href=vehicle.web_url>{{vehicle.title}}</a></p>
+    <router-link :to="{ name: 'Vehicle', params: { id: vehicle.id } }">{{vehicle.title}}</router-link>
     <p><img :alt=vehicle.title :src=vehicle.image></p>
 </template>
 

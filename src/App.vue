@@ -1,20 +1,22 @@
 <template>
   <img alt="BloxCar logo" class="logo" src="./assets/bloxcar_brand_logo_red.svg">
-  <HomePage msg="Welcome to BloxCar"/>
+  <div id="nav">
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
+  </div>
+  <router-view />
 </template>
 
 <script>
-import HomePage from './components/HomePage.vue'
 
 export default {
-  name: 'App',
-  components: {
-    HomePage
-  }
+  name: 'App'
 }
+
 </script>
 
 <style>
+
 #app {
   font-family: BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -26,4 +28,5 @@ export default {
 .logo {
   max-width: 50%;
 }
+
 </style>

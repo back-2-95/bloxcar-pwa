@@ -21,21 +21,11 @@ export default {
     }
   },
   created() {
-    this.vehicles = this.getVehicles();
+    this.vehicles = this.getVehiclesData();
   },
   components: {Location, VehicleList},
   props: {
     msg: String
-  },
-  methods: {
-    async getVehicles() {
-      try {
-        let response = await this.getVehiclesData();
-        this.vehicles = response.data;
-      } catch (error) {
-        console.log(error);
-      }
-    }
   }
 }
 </script>
