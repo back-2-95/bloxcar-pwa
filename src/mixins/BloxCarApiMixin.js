@@ -13,7 +13,8 @@ export const requestsMixin = {
                 console.log('Get data from local storage');
                 this.vehicles = JSON.parse(localStorage.getItem('vehicles'));
             } catch(e) {
-                //localStorage.removeItem('vehicles');
+                console.log(e);
+                alert('Error! Check console.');
             }
         }
         else {
@@ -43,21 +44,15 @@ export const requestsMixin = {
             return this.vehicles;
         },
         getVehicleData(id) {
-            //console.log('Call getVehicleData with id ', id);
-
             return this.vehicles[id];
         },
         handleVehicleData(data) {
-            console.log('Handle vehicle data');
+            const res = {};
 
-            const res = {}; // Create an empty object that will hold the answer
-
-            data.forEach (function (e) { // Use this function to iterate over each item in the list
-                res[e.id] = res[e.id] || [];   // inspired by the Nina Scholz answer below
-                res[e.id] = e;   // Append the result to the array
+            data.forEach (function (e) {
+                res[e.id] = res[e.id] || [];
+                res[e.id] = e;
             });
-
-            //console.log('res', res);
 
             const parsed = JSON.stringify(res);
             localStorage.setItem('vehicles', parsed);
