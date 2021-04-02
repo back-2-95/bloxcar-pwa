@@ -4,4 +4,7 @@ import { store } from './store'
 import router from './router'
 import './registerServiceWorker'
 
-createApp(App).use(store).use(router).mount('#app')
+createApp(App)
+    .use(store)
+    .use(router)
+    .mount('#app');

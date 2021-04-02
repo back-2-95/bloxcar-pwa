@@ -1,14 +1,17 @@
 <template>
-  <div class="hello">
-    <h3>{{ page_title }}</h3>
-    <VehicleList :vehicles=vehicles></VehicleList>
-  </div>
+  <Layout>
+    <div class="hello">
+      <h3>{{ page_title }}</h3>
+      <VehicleList :vehicles=vehicles></VehicleList>
+    </div>
+  </Layout>
 </template>
 
 <script>
 import { onMounted } from 'vue';
-import useBloxCarApi from '@/composables/vehicles';
-import VehicleList from './VehicleList'
+import useBloxCarApi from '../../composables/vehicles';
+import Layout from "../Layout";
+import VehicleList from '../VehicleList'
 
 export default {
   name: 'HomePage',
@@ -17,7 +20,7 @@ export default {
     onMounted(() => getVehicles());
     return { vehicles };
   },
-  components: { VehicleList },
+  components: { Layout, VehicleList },
   props: {
     page_title: String
   }

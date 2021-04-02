@@ -1,16 +1,7 @@
-import {computed, ref} from "vue";
+import { ref} from "vue";
 import { useStore } from 'vuex'
 
 const API_URL = '/api/vehiclelist/v2/vehicles';
-
-function getOneVehicle(data, id) {
-    data.forEach (function (e) {
-        if (e.id === parseInt(id)) {
-            console.log('Found vehicle data with id '+ id, e);
-            return e;
-        }
-    });
-}
 
 export default function useBloxCarApi() {
     const store = useStore();
@@ -18,7 +9,7 @@ export default function useBloxCarApi() {
     let vehicles = ref([]);
 
     function getVehicles() {
-        if (Object.keys(store.state.vehicles).length) {
+        if (hasData()) {
             console.log('store.state.vehicles has data');
             vehicles.value = store.state.vehicles;
         }
@@ -26,18 +17,34 @@ export default function useBloxCarApi() {
             fetch(`${API_URL}?range=1,50&show=id,title,vehicle_average_rating,image,position,prices,distance`)
                 .then(response => response.json())
                 .then(data => {
-                    store.state.vehicles = vehicles.value = data;
+                    const res = {};
+
+                    data.forEach (function (e) {
+                        res[e.id] = res[e.id] || [];
+                        res[e.id] = e;
+                    });
+
+                    store.state.vehicles = vehicles.value = res;
                 });
         }
     }
 
+    function hasData() {
+        return Object.keys(store.state.vehicles).length;
+    }
+
     function getVehicle(id) {
         console.log('Get vehicle with id '+ id);
-        vehicle.value = getOneVehicle(store.state.vehicles, id);
+
+        if (!hasData()) {
+            console.log('There was no data in store.state.vehicles, so fetching it...');
+            getVehicles();
+        }
+        console.log(store.state.vehicles);
+        vehicle.value = vehicles;
     }
 
     return {
-        vehiclesData: computed(() => store.state.vehicles),
         getVehicles,
         getVehicle,
         vehicle,

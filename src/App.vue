@@ -1,9 +1,4 @@
 <template>
-  <img alt="BloxCar logo" class="logo" src="./assets/bloxcar_brand_logo_red.svg">
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
   <router-view />
 </template>
 
@@ -24,9 +19,6 @@ export default {
   text-align: center;
   color: #2e2e2e;
   margin-top: 60px;
-}
-.logo {
-  max-width: 50%;
 }
 
 </style>
