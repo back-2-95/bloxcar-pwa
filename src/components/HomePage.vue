@@ -1,33 +1,28 @@
 <template>
   <div class="hello">
-    <h3>{{ msg }}</h3>
-    <Location></Location>
+    <h3>{{ page_title }}</h3>
     <VehicleList :vehicles=vehicles></VehicleList>
   </div>
 </template>
 
 <script>
-import Location from './Location.vue';
+import { onMounted } from 'vue';
+import useBloxCarApi from '@/composables/vehicles';
 import VehicleList from './VehicleList'
-
-import { requestsMixin } from "@/mixins/BloxCarApiMixin";
 
 export default {
   name: 'HomePage',
-  mixins: [requestsMixin],
-  data() {
-    return {
-      vehicles: []
-    }
+  setup() {
+    const { vehicles, getVehicles } = useBloxCarApi();
+    onMounted(() => getVehicles());
+    return { vehicles };
   },
-  created() {
-    this.vehicles = this.getVehiclesData();
-  },
-  components: {Location, VehicleList},
+  components: { VehicleList },
   props: {
-    msg: String
+    page_title: String
   }
-}
+};
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

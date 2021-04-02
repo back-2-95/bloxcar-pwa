@@ -7,19 +7,17 @@
 </template>
 
 <script>
-
-import { requestsMixin } from "@/mixins/BloxCarApiMixin";
+import { onMounted } from 'vue';
+import { useRoute } from 'vue-router';
+import useBloxCarApi from '../composables/vehicles';
 
 export default {
   name: 'VehiclePage',
-  mixins: [requestsMixin],
-  data() {
-    return {
-      vehicle: []
-    }
-  },
-  created() {
-    this.vehicle = this.getVehicleData(this.$route.params.id);
+  setup() {
+    const { vehicle, getVehicle } = useBloxCarApi();
+    onMounted(() => getVehicle(useRoute().params.id));
+    return { vehicle };
   }
-}
+};
+
 </script>

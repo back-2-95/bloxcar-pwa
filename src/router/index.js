@@ -8,12 +8,13 @@ const routes = [
         path: "/",
         name: "Home",
         component: HomePage,
-        props: { msg : "Jotain" }
+        props: { page_title : "Welcome!" }
     },
     {
         path: "/about",
         name: "About",
         component: AboutPage,
+        props: { page_title : "About" }
     },
     {
         path: "/vehicle/:id",

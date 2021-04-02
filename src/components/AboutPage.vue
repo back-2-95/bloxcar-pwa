@@ -1,5 +1,16 @@
 <template>
   <div>
-    <h3>About</h3>
+    <h3>{{ page_title }}</h3>
   </div>
 </template>
+
+<script>
+
+export default {
+  name: 'AboutPage',
+  props: {
+    page_title: String
+  }
+};
+
+</script>
