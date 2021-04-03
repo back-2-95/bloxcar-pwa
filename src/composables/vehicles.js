@@ -8,24 +8,20 @@ export default function useBloxCarApi() {
     let vehicle = ref({});
     let vehicles = ref([]);
 
-    function getVehicles() {
+    async function getVehicles() {
         if (hasData()) {
             console.log('store.state.vehicles has data');
             vehicles.value = store.state.vehicles;
         }
         else {
-            fetch(`${API_URL}?range=1,50&show=id,title,vehicle_average_rating,image,position,prices,distance`)
-                .then(response => response.json())
-                .then(data => {
-                    const res = {};
-
-                    data.forEach (function (e) {
-                        res[e.id] = res[e.id] || [];
-                        res[e.id] = e;
-                    });
-
-                    store.state.vehicles = vehicles.value = res;
-                });
+            const response = await fetch(`${API_URL}?range=1,50&show=id,title,vehicle_average_rating,image,position,prices,distance`);
+            const data = await response.json();
+            const res = {};
+            data.forEach (function (e) {
+                res[e.id] = res[e.id] || [];
+                res[e.id] = e;
+            });
+            store.state.vehicles = vehicles.value = res;
         }
     }
 
@@ -38,10 +34,10 @@ export default function useBloxCarApi() {
 
         if (!hasData()) {
             console.log('There was no data in store.state.vehicles, so fetching it...');
-            getVehicles();
+            getVehicles().then(() => {vehicle.value = store.state.vehicles[id]});
+        } else {
+            vehicle.value = store.state.vehicles[id];
         }
-        console.log(store.state.vehicles);
-        vehicle.value = vehicles;
     }
 
     return {
